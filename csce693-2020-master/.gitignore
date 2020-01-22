@@ -1,0 +1,16 @@
+# compiled object files
+*.[oa]
+!deps/lib/liblua.a
+!deps/lib/libSDL2*
+
+# residue from building lua
+deps/src/lua-5.3.5/src/*.o
+deps/src/lua-5.3.5/src/liblua.a
+deps/src/lua-5.3.5/src/lua
+deps/src/lua-5.3.5/src/luac
+
+# examples
+game_config/game_config
+game_logic/game_logic
+game_loop/game_loop
+sol_test/sol_test
