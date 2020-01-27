@@ -3,26 +3,26 @@
 #define __GAME_HPP__
 
 #include "SDL2/SDL.h"
+#include <sol/sol.hpp>
 
 class Game {
 
 public:
-   Game() = default;
-   ~Game() = default;
+   Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+   ~Game();
 
-   void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
    void handle_events();
-   void update();
+   void update(sol::state &lua);
    void render();
-   void clean();
 
-   bool running()            { return is_running; }
+   bool running()                { return is_running; }
 
 private:
    bool is_running{};
    SDL_Window* window{};
    SDL_Renderer* renderer{};
+
 };
 
-
 #endif
+
