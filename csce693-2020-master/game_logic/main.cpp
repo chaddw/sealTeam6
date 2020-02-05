@@ -1,13 +1,17 @@
 
-#include "Game.hpp"
-
 #include <iostream>
 #include <memory>
 
+#include "Game.hpp"
+
+
 int main() {
 
+   //creates lua state with the help of sol and open libraries
    sol::state lua;
    lua.open_libraries(sol::lib::base);
+
+   //loads script
 	lua.script_file("logic.lua");
  
 
@@ -17,6 +21,7 @@ int main() {
    std::cout << "Starting game loop" << std::endl;
    while (game->running()) {
       game->handle_events();
+      //lua stat is passed into update to access lua variables and functions
       game->update(lua);
       game->render();
    }

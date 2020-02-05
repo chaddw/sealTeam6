@@ -12,19 +12,15 @@ int main() {
    // read Lua script to determine initial window size infomation
    lua_State* L = luaL_newstate();
    luaL_openlibs(L);
-   //auto L = make_unique<lua_State>
+
    //executes a lua file
    luaL_dofile(L, "config.lua");
-   
-   //just opens a file
-   //luaL_loadfile(L, "config.lua");
    
    lua_getglobal(L, "xpos");
    int xpos = lua_tonumber(L, 1);
    lua_pop(L, 1);
 
    lua_getglobal(L, "ypos");
-   //int xpos = lua_tonumber(L, 1);
    int ypos = lua_tonumber(L, 1);
    lua_pop(L, 1);
 

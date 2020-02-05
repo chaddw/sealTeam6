@@ -2,21 +2,11 @@
 #include "Game.hpp"
 #include <iostream>
 #include <sol/sol.hpp>
+#include "lua.hpp"
 
-Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+
+Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) 
 {
-   //load lua file
-   //sol::state Lua;
-   //this->lua = &Lua;
-   //lua.script_file("logic.lua");
-   //this->lua = luaL_newstate();
-	
-	// load and execute from file
-	//lua.script_file("logic.lua");
-   //this->Lua->load("logic.lua");
-   //lua.open_libraries(sol::lib::base);
-   //open_libraries(sol::lib::base);
-   //this->lua = inputState;
 
    //original code
    Uint32 flags{};
@@ -43,6 +33,7 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
 
 Game::~Game()
 {
+   //lua_close(Lua);
    SDL_DestroyRenderer(renderer);
    SDL_DestroyWindow(window);
    SDL_Quit();
@@ -63,31 +54,18 @@ void Game::handle_events()
 }
 
 void Game::update(sol::state &lua)
+//void Game::update()
 {
-   //int count = 1;
-   // call Lua's function update() to increment a counter
-   // and print the returned value
-   //sol::state lua;
-	//lua.open_libraries(sol::lib::base);
-	
-
-	// load and execute from file
-	//lua.script_file("logic.lua");
-   //lua.load_file("logic.lua");
-   //lua->load_file("logic.lua");
-
-   //lua["count"] = 1;
-   //sol::function up = Lua->get
-   //sol::load_result luaUpdate = lua->load("count");
-   //int count = luaUpdate();
    
-   //count = lua.get<int>("count");
    sol::function fx = lua["update"];
    int count = fx();
    std::cout << count << std::endl;
-
-
-
+   
+   /*
+   sol::function fx = L["update"];
+   int count = fx();
+   std::cout << count << std::endl;
+   */
 
 }
 
