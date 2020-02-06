@@ -8,7 +8,6 @@
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) 
 {
 
-   //original code
    Uint32 flags{};
    if (fullscreen) {
       flags = SDL_WINDOW_FULLSCREEN;
@@ -56,16 +55,12 @@ void Game::handle_events()
 void Game::update(sol::state &lua)
 //void Game::update()
 {
-   
+   //stores the update function from lua logic file
    sol::function fx = lua["update"];
+   //calls the function
    int count = fx();
+   //outputs result
    std::cout << count << std::endl;
-   
-   /*
-   sol::function fx = L["update"];
-   int count = fx();
-   std::cout << count << std::endl;
-   */
 
 }
 

@@ -11,9 +11,8 @@ int main() {
    sol::state lua;
    lua.open_libraries(sol::lib::base);
 
-   //loads script
-	lua.script_file("logic.lua");
- 
+   //loads scripts, exception is thrown by sol if error occurs with opening file
+	bool fileError = lua.script_file("logic.lua");
 
    std::cout << "Creating game" << std::endl;
    auto game = std::make_unique<Game>("1st Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
