@@ -1,6 +1,8 @@
 
 #include "Game.hpp"
 #include <iostream>
+#include <thread>
+#include <chrono> 
 
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
