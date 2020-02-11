@@ -2,13 +2,19 @@
 #include "Game.hpp"
 
 #include <iostream>
+#include <memory>
 
 int main() {
-
+   std::unique_ptr<Game> game;
    std::cout << "Creating game" << std::endl;
-   Game* game = new Game();
-
-   game->init("1st Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+   
+   //Tries to create game pointer, catches exception and exits if unable to
+   try {
+      game = std::make_unique<Game>("1st Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+   } catch(const char* ex) {
+      std::cout << "Exception caught: " << ex << std::endl;
+      exit(-1);
+   }
 
    std::cout << "Starting game loop" << std::endl;
    while (game->running()) {
@@ -17,7 +23,5 @@ int main() {
       game->render();
    }
 
-   game->clean();
    return 0;
 }
-

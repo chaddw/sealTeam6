@@ -2,7 +2,7 @@
 #include "Game.hpp"
 #include <iostream>
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
    Uint32 flags{};
    if (fullscreen) {
@@ -14,16 +14,29 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
       window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
       if (window) {
          std::cout << "Window created..." << std::endl;
+      } else {
+         throw "Window not created!";
       }
       renderer = SDL_CreateRenderer(window, -1, 0);
       if (renderer) {
          SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
          std::cout << "Renderer created..." << std::endl;
+      } else {
+         throw "Renderer not created!";
       }
-      is_running = true;
+   is_running = true;
    } else {
       is_running = false;
+      throw "SDL not initialized";
    }
+}
+
+Game::~Game()
+{
+   SDL_DestroyRenderer(renderer);
+   SDL_DestroyWindow(window);
+   SDL_Quit();
+   std::cout << "Game cleaned..." << std::endl;
 }
 
 void Game::handle_events()
@@ -47,16 +60,11 @@ void Game::update()
 
 void Game::render()
 {
-   SDL_RenderClear(renderer);
+   if(SDL_RenderClear(renderer) != 0) {
+      throw "Render not cleared!";
+   }
    // this is where we would add stuff to render
    SDL_RenderPresent(renderer);
-}
-
-void Game::clean()
-{
-   SDL_DestroyRenderer(renderer);
-   SDL_DestroyWindow(window);
-   std::cout << "Game cleaned..." << std::endl;
 }
 
 
