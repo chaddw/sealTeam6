@@ -23,7 +23,7 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
          throw "Window not created!";
       }
       renderer = SDL_CreateRenderer(window, -1, 0);
-      if (!renderer) {
+      if (renderer) {
          SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
          std::cout << "Renderer created..." << std::endl;
       } else {

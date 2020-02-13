@@ -10,8 +10,9 @@ int main() {
    std::unique_ptr<Game> game;
    std::cout << "Creating game" << std::endl;
 
-   //Set delta time, Demoninator = Frames per secs
-   float deltaTime = 1.0f/(60.0f);
+   //Set delta time,  1/60 fps = 16666 microsecs
+   std::chrono::microseconds deltaTime(16666);
+   //std::chrono::microseconds deltaTime(33333);//testing on VM
 
    //Tries to create game pointer, catches exception and exits if unable to
    try {
@@ -24,7 +25,7 @@ int main() {
    std::cout << "Starting game loop" << std::endl;
    while (game->running()) {
       //gets start time
-      Uint64 start = SDL_GetPerformanceCounter();
+      auto start = std::chrono::high_resolution_clock::now();
 
       //game functions
       game->handle_events();
@@ -32,22 +33,23 @@ int main() {
       game->render();
       
       //gets end time
-      Uint64 end = SDL_GetPerformanceCounter();
+      auto end = std::chrono::high_resolution_clock::now();
 
       //calculates time in seconds
-      float elapsedTime = (end-start)/static_cast<float>(SDL_GetPerformanceFrequency()); 
+      auto elapsedTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start); 
 
       //checks if a delay is needed
       if (elapsedTime < deltaTime){
-         //delays in MS (hence 1000.0f)
-	      SDL_Delay( floor((deltaTime - elapsedTime) * 1000.0f) );
+         //delays in MS
+         std::this_thread::sleep_for(deltaTime-elapsedTime);
       }
 
-      //testing
+      //testing: Prints time variable and FPS
       /*
-      Uint64 end2 = SDL_GetPerformanceCounter();
-      float elapsedTime2 = (end2-start)/(static_cast<float>(SDL_GetPerformanceFrequency())); 
-      std::cout << "Delta: " << deltaTime * 1000 << ", ET: "<< elapsedTime * 1000 << ", TET: " << elapsedTime2 * 1000 << "\n";
+      auto end2 = std::chrono::high_resolution_clock::now();
+      auto elapsedTime2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start); 
+      std::cout << "Delta: " << std::chrono::duration_cast<std::chrono::microseconds>(deltaTime).count() << ", ET: "<< std::chrono::duration_cast<std::chrono::microseconds>(elapsedTime).count() << ", TET: " << std::chrono::duration_cast<std::chrono::microseconds>(elapsedTime2).count()  << "\n";
+      std::cout << "FPS: " << 1/(std::chrono::duration_cast<std::chrono::microseconds>(elapsedTime2).count()/1000000.0f) << std::endl;
       */
    }
 

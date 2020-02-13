@@ -11,7 +11,7 @@ OBJS = \
 all: $(PGM)
 
 $(PGM): $(OBJS)
-	$(CXX) -Wall -Wextra -o $@ $(OBJS) $(LDFLAGS)
+	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
 
 clean:
 	-rm -f *.o
