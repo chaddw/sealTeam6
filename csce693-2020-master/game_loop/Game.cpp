@@ -17,13 +17,20 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
       if (window) {
          std::cout << "Window created..." << std::endl;
       } else {
+         //Clean up due to error:Window is destroyed & SDL closed
+         SDL_DestroyWindow(window);
+         SDL_Quit();
          throw "Window not created!";
       }
       renderer = SDL_CreateRenderer(window, -1, 0);
-      if (renderer) {
+      if (!renderer) {
          SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
          std::cout << "Renderer created..." << std::endl;
       } else {
+         //Clean up due to error:Renderer/Window is destroyed & SDL closed
+         SDL_DestroyRenderer(renderer);
+         SDL_DestroyWindow(window);
+         SDL_Quit();
          throw "Renderer not created!";
       }
    is_running = true;
