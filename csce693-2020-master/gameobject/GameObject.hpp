@@ -6,13 +6,17 @@
 
 class GameObject {
 public:
+   GameObject();
+   
+   /*
    GameObject(const char* filename_img,
               const float xpos, const float ypos,
-              const float xvel, const float yvel);
-   ~GameObject();
+              const float xvel, const float yvel);*/
+   
+   virtual ~GameObject();
 
-   void update(const float dt);
-   void render();
+   virtual void update(const float dt) = 0;
+   virtual void render() = 0;
 
 private:
    float xpos{}, ypos{};

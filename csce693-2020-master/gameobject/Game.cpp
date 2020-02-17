@@ -2,17 +2,23 @@
 #include "Game.hpp"
 
 #include <iostream>
+#include <memory>
+#include <vector>
 #include "SDL2/SDL_image.h"
 
 #include "texture_utils.hpp"
 #include "GameObject.hpp"
+#include "Tank.hpp"
+#include "Chopper.hpp"
+#include "Pacman.hpp"
+
 
 SDL_Renderer* Game::renderer{};
 SDL_Window* Game::window{};
 
-GameObject* tank{};
-GameObject* chopper{};
-GameObject* pacman{};
+//GameObject* tank{};
+//GameObject* chopper{};
+//GameObject* pacman{};
 
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -44,18 +50,35 @@ Game::~Game()
    SDL_DestroyWindow(window);
    SDL_Quit();
 
-   delete tank;
-   delete chopper;
-   delete pacman;
+   //delete tank;
+   //delete chopper;
+   //delete pacman;
 
    std::cout << "Game cleaned..." << std::endl;
 }
 
 void Game::load_level()
 {
+   /*
    tank = new GameObject("../assets/images/tank-big-down.png", 0.0f, 0.0f, 0.5f, 0.5f);
    chopper = new GameObject("../assets/images/chopper-single.png", 50.0f, 50.0f, 0.5f, 0.5f);
    pacman = new GameObject("../assets/images/pacman/pacman_32x32.png", 100.0f, 100.0f, 0.5f, 0.5f);
+   */
+
+   /*
+   auto tank = std::make_unique<GameObject>( ../assets/images/tank-big-down.png", 0.0f, 0.0f, 0.5f, 0.5f);
+   auto chopper = std::make_unique<GameObject>("../assets/images/chopper-single.png", 50.0f, 50.0f, 0.5f, 0.5f);
+   auto pacman = std::make_unique<GameObject>("../assets/images/pacman/pacman_32x32.png", 100.0f, 100.0f, 0.5f, 0.5f);
+   */   
+
+   auto tank = std::make_unique<Tank>( 0.0f, 0.0f, 0.5f, 0.5f);
+   auto chopper = std::make_unique<Chopper>(50.0f, 50.0f, 0.5f, 0.5f);
+   auto pacman = std::make_unique<Pacman>(100.0f, 100.0f, 0.5f, 0.5f);
+
+
+   gameObjects.push_back(std::move(tank));
+   gameObjects.push_back(std::move(chopper));
+   gameObjects.push_back(std::move(pacman));
 }
 
 void Game::handle_events()
@@ -73,17 +96,30 @@ void Game::handle_events()
 
 void Game::update(const float dt)
 {
+   /*
    tank->update(dt);
    chopper->update(dt);
    pacman->update(dt);
+   */
+
+   for (auto& go : gameObjects){
+      go->update(dt);
+   }
 }
 
 void Game::render()
 {
    SDL_RenderClear(renderer);
+   /*
    tank->render();
    chopper->render();
    pacman->render();
+   */
+
+   for (auto& go : gameObjects){
+      go->render();
+   }
+
    SDL_RenderPresent(renderer);
 }
 

@@ -8,7 +8,10 @@ OBJS = \
 	main.o \
 	Game.o \
 	texture_utils.o \
-	GameObject.o
+	GameObject.o \
+	Tank.o \
+	Chopper.o \
+	Pacman.o
 
 all: $(PGM)
 

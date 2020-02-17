@@ -2,7 +2,14 @@
 #ifndef __GAME_HPP__
 #define __GAME_HPP__
 
+#include <memory>
+#include <vector>
+
 #include "SDL2/SDL.h"
+#include "GameObject.hpp"
+#include "Tank.hpp"
+#include "Chopper.hpp"
+#include "Pacman.hpp"
 
 class Game {
 
@@ -20,6 +27,8 @@ public:
 
    static SDL_Renderer* renderer;
    static SDL_Window* window;
+
+   std::vector<std::unique_ptr<GameObject>> gameObjects;
 
 private:
    int counter{};
