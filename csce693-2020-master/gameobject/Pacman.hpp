@@ -8,6 +8,7 @@
 
 class Pacman : public GameObject {
 public:
+   //Overload init functions to allow for new image or default
    Pacman(const char* filename_img,
               const float xpos, const float ypos,
               const float xvel, const float yvel);

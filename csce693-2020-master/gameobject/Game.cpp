@@ -59,26 +59,24 @@ Game::~Game()
 
 void Game::load_level()
 {
-   /*
+   /* // Original Code
    tank = new GameObject("../assets/images/tank-big-down.png", 0.0f, 0.0f, 0.5f, 0.5f);
    chopper = new GameObject("../assets/images/chopper-single.png", 50.0f, 50.0f, 0.5f, 0.5f);
    pacman = new GameObject("../assets/images/pacman/pacman_32x32.png", 100.0f, 100.0f, 0.5f, 0.5f);
-   */
-
-   /*
+   
    auto tank = std::make_unique<GameObject>( ../assets/images/tank-big-down.png", 0.0f, 0.0f, 0.5f, 0.5f);
    auto chopper = std::make_unique<GameObject>("../assets/images/chopper-single.png", 50.0f, 50.0f, 0.5f, 0.5f);
    auto pacman = std::make_unique<GameObject>("../assets/images/pacman/pacman_32x32.png", 100.0f, 100.0f, 0.5f, 0.5f);
    */   
 
+   //Make each game object a unique pointer and place it in gameObjects
    auto tank = std::make_unique<Tank>( 0.0f, 0.0f, 0.5f, 0.5f);
    auto chopper = std::make_unique<Chopper>(50.0f, 50.0f, 0.5f, 0.5f);
    auto pacman = std::make_unique<Pacman>(100.0f, 100.0f, 0.5f, 0.5f);
 
-
-   gameObjects.push_back(std::move(tank));
-   gameObjects.push_back(std::move(chopper));
-   gameObjects.push_back(std::move(pacman));
+   gameObjects.emplace_back(std::move(tank));
+   gameObjects.emplace_back(std::move(chopper));
+   gameObjects.emplace_back(std::move(pacman));
 }
 
 void Game::handle_events()
@@ -96,12 +94,13 @@ void Game::handle_events()
 
 void Game::update(const float dt)
 {
-   /*
+   /* //Old code
    tank->update(dt);
    chopper->update(dt);
    pacman->update(dt);
    */
 
+   //For each gameObject update it
    for (auto& go : gameObjects){
       go->update(dt);
    }
@@ -110,12 +109,13 @@ void Game::update(const float dt)
 void Game::render()
 {
    SDL_RenderClear(renderer);
-   /*
+   /* //Old code
    tank->render();
    chopper->render();
    pacman->render();
    */
 
+   //For each gameObject render it
    for (auto& go : gameObjects){
       go->render();
    }

@@ -3,6 +3,7 @@
 #include "texture_utils.hpp"
 #include "Game.hpp"
 
+//Custom init
 Pacman::Pacman(const char* filename_img,
                        const float xpos, const float ypos,
                        const float xvel, const float yvel)
@@ -11,6 +12,7 @@ Pacman::Pacman(const char* filename_img,
    texture = texture::load_texture(filename_img);
 }
 
+//Default init
 Pacman::Pacman(const float xpos, const float ypos, const float xvel, const float yvel)
 : xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
 {
