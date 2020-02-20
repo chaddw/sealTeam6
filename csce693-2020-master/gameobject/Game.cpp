@@ -70,13 +70,23 @@ void Game::load_level()
    */   
 
    //Make each game object a unique pointer and place it in gameObjects
-   auto tank = std::make_unique<Tank>( 0.0f, 0.0f, 0.5f, 0.5f);
-   auto chopper = std::make_unique<Chopper>(50.0f, 50.0f, 0.5f, 0.5f);
-   auto pacman = std::make_unique<Pacman>(100.0f, 100.0f, 0.5f, 0.5f);
 
-   gameObjects.emplace_back(std::move(tank));
-   gameObjects.emplace_back(std::move(chopper));
-   gameObjects.emplace_back(std::move(pacman));
+   try
+   {
+      auto tank = std::make_unique<Tank>( 0.0f, 0.0f, 0.5f, 0.5f);
+      auto chopper = std::make_unique<Chopper>(50.0f, 50.0f, 0.5f, 0.5f);
+      auto pacman = std::make_unique<Pacman>(100.0f, 100.0f, 0.5f, 0.5f);
+
+      gameObjects.emplace_back(std::move(tank));
+      gameObjects.emplace_back(std::move(chopper));
+      gameObjects.emplace_back(std::move(pacman));
+      
+   } catch(const char* ex) 
+   {
+      std::cout << "Exception caught: " << ex << std::endl;
+      exit(-1);
+   }
+
 }
 
 void Game::handle_events()
