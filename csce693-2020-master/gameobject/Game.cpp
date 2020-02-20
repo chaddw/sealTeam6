@@ -16,6 +16,7 @@
 SDL_Renderer* Game::renderer{};
 SDL_Window* Game::window{};
 
+//original code
 //GameObject* tank{};
 //GameObject* chopper{};
 //GameObject* pacman{};
@@ -64,14 +65,13 @@ void Game::load_level()
    chopper = new GameObject("../assets/images/chopper-single.png", 50.0f, 50.0f, 0.5f, 0.5f);
    pacman = new GameObject("../assets/images/pacman/pacman_32x32.png", 100.0f, 100.0f, 0.5f, 0.5f);
    
+   //Used for Part 1
    auto tank = std::make_unique<GameObject>( ../assets/images/tank-big-down.png", 0.0f, 0.0f, 0.5f, 0.5f);
    auto chopper = std::make_unique<GameObject>("../assets/images/chopper-single.png", 50.0f, 50.0f, 0.5f, 0.5f);
    auto pacman = std::make_unique<GameObject>("../assets/images/pacman/pacman_32x32.png", 100.0f, 100.0f, 0.5f, 0.5f);
    */   
 
    //Make each game object a unique pointer and place it in gameObjects
-
-   
    auto tank = std::make_unique<Tank>( 0.0f, 0.0f, 0.5f, 0.5f);
    auto chopper = std::make_unique<Chopper>(50.0f, 50.0f, 0.5f, 0.5f);
    auto pacman = std::make_unique<Pacman>(100.0f, 100.0f, 0.5f, 0.5f);

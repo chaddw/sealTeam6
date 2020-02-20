@@ -3,20 +3,21 @@
 #include "texture_utils.hpp"
 #include "Game.hpp"
 
+//Default init
+Pacman::Pacman(const float xpos, const float ypos, const float xvel, const float yvel)
+: xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
+{
+   texture = texture::load_texture("../assets/images/pacman/pacman_32x32.png");
+}
+
 //Custom init
+//Can be used to load different than the dafault
 Pacman::Pacman(const char* filename_img,
                        const float xpos, const float ypos,
                        const float xvel, const float yvel)
 : xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
 {
    texture = texture::load_texture(filename_img);
-}
-
-//Default init
-Pacman::Pacman(const float xpos, const float ypos, const float xvel, const float yvel)
-: xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
-{
-   texture = texture::load_texture("../assets/images/pacman/pacman_32x32.png");
 }
 
 Pacman::~Pacman()

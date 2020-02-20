@@ -3,20 +3,21 @@
 #include "texture_utils.hpp"
 #include "Game.hpp"
 
+//Default init
+Tank::Tank(const float xpos, const float ypos, const float xvel, const float yvel)
+: xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
+{
+   texture = texture::load_texture("../assets/images/tank-big-down.png");
+}
+
 //Custom init
+//Can be used to load different than the dafault
 Tank::Tank(const char* filename_img,
                        const float xpos, const float ypos,
                        const float xvel, const float yvel)
 : xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
 {
    texture = texture::load_texture(filename_img);
-}
-
-//Default init
-Tank::Tank(const float xpos, const float ypos, const float xvel, const float yvel)
-: xpos(xpos), ypos(ypos), xvel(xvel), yvel(yvel)
-{
-   texture = texture::load_texture("../assets/images/tank-big-down.png");
 }
 
 Tank::~Tank()

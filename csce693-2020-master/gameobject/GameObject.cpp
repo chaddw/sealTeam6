@@ -3,11 +3,12 @@
 #include "texture_utils.hpp"
 #include "Game.hpp"
 
+
 GameObject::GameObject()
 {
 }
 
-/*
+/*Deleted commented out code to make class purely abstract
 GameObject::GameObject(const char* filename_img,
                        const float xpos, const float ypos,
                        const float xvel, const float yvel)
@@ -18,7 +19,7 @@ GameObject::GameObject(const char* filename_img,
 
 GameObject::~GameObject()
 {
-   SDL_DestroyTexture(texture);
+   //SDL_DestroyTexture(texture);
 }
 
 /*

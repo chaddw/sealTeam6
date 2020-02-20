@@ -8,22 +8,25 @@ class GameObject {
 public:
    GameObject();
    
-   /*
+   /*Original Code
    GameObject(const char* filename_img,
               const float xpos, const float ypos,
               const float xvel, const float yvel);*/
    
+   //labeled as virtual 
    virtual ~GameObject();
 
+   //abstract functions
    virtual void update(const float dt) = 0;
    virtual void render() = 0;
 
 private:
-   float xpos{}, ypos{};
-   float xvel{}, yvel{};
+   //Deleted to make class purely abstract
+   //float xpos{}, ypos{};
+   //float xvel{}, yvel{};
 
-   SDL_Texture* texture{};
-   SDL_Rect src_rect, dest_rect;
+   //SDL_Texture* texture{};
+   //SDL_Rect src_rect, dest_rect;
 };
 
 #endif
