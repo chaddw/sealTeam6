@@ -28,6 +28,7 @@ public:
    static SDL_Renderer* renderer;
    static SDL_Window* window;
 
+   //container that store gameobjects
    std::vector<std::unique_ptr<GameObject>> gameObjects;
 
 private:
