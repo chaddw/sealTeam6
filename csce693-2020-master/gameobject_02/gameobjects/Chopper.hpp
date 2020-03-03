@@ -6,7 +6,7 @@
 
 class Chopper: public GameObject {
 public:
-   //removed image in constructor
+   //removed image parameter in constructor
    Chopper(//const char* texture_sheet,
            const float xpos, const float ypos,
            const float xvel, const float yvel);

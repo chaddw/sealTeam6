@@ -6,6 +6,7 @@
 
 class Pacman: public GameObject {
 public:
+   //removed image parameter in constructor
    Pacman(//const char* texture_sheet,
           const float xpos, const float ypos,
           const float xvel, const float yvel);

@@ -41,7 +41,7 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
 
    //open libraries
    lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
-   //loads lua script file, throw exception if error occurs
+   //loads lua script file, throws exception if error occurs
    lua.script_file("config.lua");
    
 
@@ -66,11 +66,16 @@ void Game::load_level()
    //game_objs.emplace_back(std::move(pacman));
    */
 
+   //places "gameobjs" table in cpp variable
    sol::table gameObjs = lua["gameobjs"];
+   //iterates through each player configuration
    for (const auto& key_value_pair : gameObjs){
+      //stores player name
       sol::object player = key_value_pair.first;
+      //stores list of player attributes
       sol::table tbl = key_value_pair.second;
 
+      //variable containers for player attributes listed in lua config file
       bool validConfig = true;
       float xpos = 0;
       float ypos = 0;
@@ -80,12 +85,15 @@ void Game::load_level()
 
       std::cout << "loading " << player.as<std::string>() << std::endl;
 
+      //Iterates through the list of attributes for each player
       for (const auto& list : tbl){
          sol::type varType = list.second.get_type();
 
-
+         //checks types and checks attribute name
+         //if unknown attribue is read, then config flag is false.
          switch (varType)
          {
+            //checks string case
             case sol::type::string:
                if (list.first.as<std::string>() == "kind")
                {
@@ -98,6 +106,7 @@ void Game::load_level()
                }
                break;
             
+            //checks number case
             case sol::type::number:
                if (list.first.as<std::string>() == "xpos")
                {
@@ -125,6 +134,7 @@ void Game::load_level()
                }
                break;
             
+            //defaults to unknown type
             default:
                std::cout << "Unkown type read in lua config file" << std::endl;
                validConfig = false;
@@ -132,6 +142,8 @@ void Game::load_level()
          }
       }
       
+      //if all attributes are recognized, then it is loaded into game object vector list
+      //by specified kind
       if (validConfig)
       {
          if (kindType == "chopper")

@@ -6,6 +6,7 @@
 
 class Tank: public GameObject {
 public:
+   //removed image parameter in constructor
    Tank(//const char* texture_sheet,
         const float xpos, const float ypos,
         const float xvel, const float yvel);
