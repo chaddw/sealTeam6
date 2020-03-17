@@ -3,6 +3,7 @@
 #define __Game_HPP__
 
 #include "SDL2/SDL.h"
+#include "sol/sol.hpp"
 
 class AssetManager;
 
@@ -15,6 +16,12 @@ public:
    void handle_events();
    void update(const float dt);
    void render();
+
+   //added function for part 1
+   void initialize();
+
+   //static sol state variable
+   static sol::state lua;
 
    void load_level(const int number);
 

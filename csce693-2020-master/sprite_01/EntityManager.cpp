@@ -56,3 +56,8 @@ void EntityManager::list_all_entities() const
    }
 }
 
+void EntityManager::initialize(){
+   for (auto& e : entities){
+      e->initialize();
+   }
+}
