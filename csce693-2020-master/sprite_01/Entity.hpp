@@ -28,7 +28,7 @@ public:
       component->owner = this;
       components.emplace_back(component);
       component_type_map[&typeid(*component)] = component;
-      //component->initialize();
+      //component->initialize();//Deleted
       return *component;
    }
 

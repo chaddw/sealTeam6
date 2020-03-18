@@ -18,6 +18,7 @@ entities["chopper"] = {
    sprite =    { texture_id = "chopper-image" }
 }
 
+
 function print_assets_table(tbl)
    print("-----------------------")
    print("Printing Assets Table")

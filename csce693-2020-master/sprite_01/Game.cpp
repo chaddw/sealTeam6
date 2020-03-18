@@ -84,11 +84,13 @@ void Game::render()
 
 void Game::load_level(const int number)
 {
+   //load assets and entiities from lua stack
    sol::table assets = lua["assets"];
    sol::table entities = lua["entities"];
 
    std::cout << "Loading Assets: " << std::endl;
 
+   //adds the assets
    for (const auto& key_value : assets)
    {
       sol::object assetName = key_value.first;
@@ -97,7 +99,7 @@ void Game::load_level(const int number)
       std::string assetNameStr;
       std::string fileNameStr;
 
-
+      //minor error checking to ensure parameters are the right type
       if (sol::type::string == assetName.get_type())
       {
          assetNameStr = assetName.as<std::string>();
@@ -110,6 +112,7 @@ void Game::load_level(const int number)
       }
    }
 
+   //add entities
    for (const auto& key_value : entities)
    {
       sol::object entityName = key_value.first;
@@ -128,7 +131,7 @@ void Game::load_level(const int number)
       std::string spriteId;
 
 
-      //iterates through the lua paramenters for each player
+      //iterates through the lua paramenters for each component
       for (const auto& list : tbl){
          sol::object compName = list.first;
          std::cout << "loading " << compName.as<std::string>() << std::endl;
@@ -203,6 +206,7 @@ void Game::load_level(const int number)
          }
       }
 
+      //checks if all parameter were correctly read before creating entity and 
       if (validConfig){
          std::cout << "Creating: " << entityNameStr << std::endl;
          Entity& general_entity(entity_mgr.add_entity(entityNameStr));
@@ -212,7 +216,7 @@ void Game::load_level(const int number)
 
    }
 
-   /*
+   /* Original Code
    // add assets to asset manager
    asset_manager->add_texture("tank-image", "../assets/images/tank-big-right.png");
    asset_manager->add_texture("chopper-image", "../assets/images/chopper-spritesheet.png");

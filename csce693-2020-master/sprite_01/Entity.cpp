@@ -40,6 +40,7 @@ void Entity::list_all_components() const
    }
 }
 
+//added function for part 1
 void Entity::initialize(){
    for (auto& c : components){
       c->initialize();
